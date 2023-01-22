@@ -5,13 +5,13 @@ import SignIn from './components/SignIn/Sign';
 import { Navigation } from './components/Navigation';
 import { Earnings } from './components/Earnings';
 import { Home } from './components/Home';
-import { Analytics } from './components/Analytics';
+import Analytics from './components/Analytics';
 import { useState } from 'react';
 import { Box } from '@mui/material';
 
 function App() {
   const [tab, setTab] = useState(3);
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
 
   const handleLogin = () => {
     setIsLoggedIn(true);
