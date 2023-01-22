@@ -1,7 +1,7 @@
 import React from 'react';
 
 import {
-  Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography,
+    Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography,
 } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -10,29 +10,29 @@ import apiClient from '../../clients/api-client';
 
 const theme = createTheme();
 
-export default function SignUp() {
-  const signUpUser = async (user) => {
-    try {
-      const { data } = await apiClient.post('/auth/register', user);
-      localStorage.setItem('cardio-auth', data.access_token);
-    } catch (error) {
-        console.log(error);
-    }
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    const data = new FormData(event.currentTarget);
-    const user = {
-      firstName: data.get('firstName'),
-      lastName: data.get('lastName'),
-      email: data.get('email'),
-      password: data.get('password'),
+export default function SignUp(props) {
+    const signUpUser = async (user) => {
+        try {
+            const { data } = await apiClient.post('/auth/register', user);
+            localStorage.setItem('cardio-auth', data.access_token);
+        } catch (error) {
+            console.log(error);
+        }
     };
 
-    await signUpUser(user);
-  };
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+
+        const data = new FormData(event.currentTarget);
+        const user = {
+            firstName: data.get('firstName'),
+            lastName: data.get('lastName'),
+            email: data.get('email'),
+            password: data.get('password'),
+        };
+
+        await signUpUser(user);
+    };
 
     return (
         <ThemeProvider theme={theme}>

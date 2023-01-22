@@ -2,40 +2,37 @@ import './App.css';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/Sign';
 import { Navigation } from './components/Navigation';
-import { Earnings } from './components/Earnings';
+import Earnings from './components/Earnings';
 import { Home } from './components/Home';
-import { Analytics } from './components/Analytics';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, createContext, useContext } from 'react';
 import { Box } from '@mui/material';
 
+export const TokenContext = createContext(localStorage.getItem('cardio-auth'));
 function App() {
-  const [tab, setTab] = useState(3);
-  const [isLoggedIn, setIsLoggedIn] = useState(true);
+  const [tab, setTab] = useState(0);
+  const [isLoggedIn, setIsLoggedIn] = useState(localStorage.getItem('cardio-auth'));
 
   const handleLogin = () => {
-    setIsLoggedIn(true)
-    setTab(1)
+    setIsLoggedIn(true);
+    setTab(0);
   }
 
-  useEffect(() => {
-    handleLogin()
-  }, [])
+  // useEffect(() => {
+  //   handleLogin()
+  // }, [])
 
   return <>
-    <Box sx={{
-      maxWidth: 500,
-      margin: "auto",
-      marginTop: 2
-    }}>
-      {isLoggedIn ? <>
-        {(tab == 0) && <Earnings />}
-        {(tab == 1) && <Home />} </> : <>
-        {(tab == 3) && <SignIn handleLogin={handleLogin} />}
-        {(tab == 4) && <SignUp handleLogin={handleLogin} />}
-      </>}
-      <Box sx={{ height: 70 }}></Box>
-    </Box>
-    <Navigation isLoggedIn={isLoggedIn} tab={tab} setTab={setTab} />
+    <TokenContext.Provider value={localStorage.getItem('cardio-auth')}>
+      <Box sx={{
+        margin: "auto",
+        marginTop: 2
+      }}>
+        {isLoggedIn ? <>
+          {(tab === 0) && <Home />}
+          {(tab === 1) && <Earnings />} </> : <SignIn handleLogin={handleLogin} setTab={setTab} />}
+      </Box>
+      {isLoggedIn && <Navigation tab={tab} setTab={setTab} />}
+    </TokenContext.Provider>
   </>
 }
 

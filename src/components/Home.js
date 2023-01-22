@@ -1,34 +1,51 @@
 import React from "react";
 import { Line } from "react-chartjs-2";
-import { Box } from "@mui/system"
+import Box from "@mui/material/Box"
+import Container from "@mui/material/Container"
+import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Grid";
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import SavingsIcon from '@mui/icons-material/Savings';
+import PriceCheckIcon from '@mui/icons-material/PriceCheck';
 
 export const Home = () => {
-    return <>
-        <Box sx={{
-            borderRadius: 4,
-            background: "#9747ff",
-            width: "70%",
-            margin: "auto",
-            textAlign: "center",
-            lineHeight: "1em",
-            fontSize: "24px",
-            padding: 1,
-            color: "white"
-        }}>
-            <p sx={{ display: 'inline-block', width: "100%" }}>Budget: $140.00</p>
-            <p sx={{ display: 'inline-block', width: "100%" }}>Savings: $1739.25</p>
-        </Box>
-        <Line options={{
-            scales: { y: { min: 0 } },
-            pointRadius: 0,
-            color: '#9747ff',
-        }} data={{
-            labels: Array(12).fill(''),
-            datasets: [{
-                data: Array(12).fill(true).map((e, i) => 500 * 1.12 ** i),
-                backgroundColor: '#9747ff',
-                borderColor: '#9747ff'
-            }]
-        }} />
-    </>
+    return <Container>
+        <Grid container justifyContent="center" spacing={2}>
+            <Grid item xs={6} md={3}>
+                <Card sx={{ borderRadius: 5 }}>
+                    <CardContent sx={{ background: "rgb(148, 0, 212)", color: "#fff" }}>
+                        <Typography textAlign="center"><PriceCheckIcon sx={{ fontSize: 40 }} /></Typography>
+                        <Typography textAlign="center" fontWeight="bold">Budget</Typography>
+                        <Typography textAlign="center" fontWeight="bold" variant="h5">$140.00</Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+            <Grid item xs={6} md={3}>
+                <Card sx={{ borderRadius: 5 }}>
+                    <CardContent sx={{ background: "rgb(148, 0, 212)", color: "#fff" }}>
+                        <Typography textAlign="center"><SavingsIcon sx={{ fontSize: 40 }} /></Typography>
+                        <Typography textAlign="center" fontWeight="bold">Savings</Typography>
+                        <Typography textAlign="center" fontWeight="bold" variant="h5">$1739.25</Typography>
+                    </CardContent>
+                </Card>
+            </Grid>
+            <Grid item xs={12} md={8} sx={{ height: 400 }}>
+                <Line
+                    options={{
+                        maintainAspectRatio: false,
+                        scales: { y: { min: 0 } },
+                        pointRadius: 0,
+                        color: '#9747ff',
+                    }} data={{
+                        labels: Array(12).fill(''),
+                        datasets: [{
+                            data: Array(12).fill(true).map((e, i) => 500 * 1.12 ** i),
+                            backgroundColor: '#9747ff',
+                            borderColor: '#9747ff'
+                        }]
+                    }} />
+            </Grid>
+        </Grid>
+    </Container>
 }
