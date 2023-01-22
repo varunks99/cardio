@@ -88,6 +88,5 @@ export const Home = () => {
                 <Transaction type={data.type} date={data.date} name={data.name} amount={data.amount} />
             ) }
         </List>
-        <Box sx={{height: 70}}></Box>
     </Box>
 }

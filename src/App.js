@@ -13,7 +13,7 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 
 function App() {
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(3)
 
   return <>
     <Box sx={ {
@@ -22,6 +22,8 @@ function App() {
         { (tab == 0) && <Earnings /> }
         { (tab == 1) && <Home /> }
         { (tab == 2) && <Analytics /> }
+        { (tab == 3) && <SignUp /> }
+        <Box sx={{height: 70}}></Box>
     </Box>
     <Navigation tab={tab} setTab={setTab} />
   </>
