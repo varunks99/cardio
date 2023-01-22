@@ -1,92 +1,34 @@
-import { Box, List, ListItem, ListItemText } from "@mui/material"
-
-const Transaction = ({ type, date, name, amount }) => {
-    return <ListItem
-        key={type+date+name+amount}
-        sx={{ textAlign: "center",
-    }}
-    >
-        <ListItemText primary={name} secondary={date + ", " + amount} />
-
-    </ListItem>
-}
+import React from "react";
+import { Line } from "react-chartjs-2";
+import { Box } from "@mui/system"
 
 export const Home = () => {
-    const hardcodeTransactions = [
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        { 
-            type: "Payment",
-            date: "Jan 12",
-            name: "Pizza",
-            amount: "$15.00"
-        },
-        
-    ]
-
-    return  <Box sx={{
-        mx: "auto", 
-        width: 450,
-        textAlign: "center"
-    }}>
-        <h1>Home</h1>
-        <h1>Balance: $250.00</h1>
-        <List>
-            { hardcodeTransactions.map(data => 
-                <Transaction type={data.type} date={data.date} name={data.name} amount={data.amount} />
-            ) }
-        </List>
-    </Box>
+    return <>
+        <Box sx={{
+            borderRadius: 4,
+            background: "#9747ff",
+            width: "70%",
+            margin: "auto",
+            textAlign: "center",
+            lineHeight: "1em",
+            fontSize: "24px",
+            padding: 1,
+            color: "white"
+        }}>
+            <p sx={{ display: 'inline-block', width: "100%" }}>Budget: $140.00</p>
+            <p sx={{ display: 'inline-block', width: "100%" }}>Savings: $1739.25</p>
+        </Box>
+        <Line options={{
+            scales: { y: { min: 0 } },
+            pointRadius: 0,
+            color: '#9747ff',
+        }} data={{
+            labels: Array(12).fill(''),
+            datasets: [{
+                data: Array(12).fill(true).map((e, i) => 500 * 1.12 ** i),
+                backgroundColor: '#9747ff',
+                borderColor: '#9747ff'
+            }]
+        }} />
+    </>
 }
