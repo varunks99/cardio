@@ -10,17 +10,27 @@ import { useState } from 'react';
 import { Box } from '@mui/material';
 
 function App() {
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(3);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setTab(1)
+  }
 
   return <>
-    <Box sx={ {
+    <Box sx={{
       height: "auto",
-    } }>
-        { (tab == 0) && <Earnings /> }
-        { (tab == 1) && <Home /> }
-        { (tab == 2) && <Analytics /> }
+    }}>
+      {isLoggedIn ? <>
+        {(tab == 0) && <Earnings />}
+        {(tab == 1) && <Home />}
+        {(tab == 2) && <Analytics />} </> : <>
+        {(tab == 3) && <SignIn handleLogin={handleLogin} />}
+        {(tab == 4) && <SignUp handleLogin={handleLogin} />}
+      </>}
     </Box>
-    <Navigation tab={tab} setTab={setTab} />
+    <Navigation isLoggedIn={isLoggedIn} tab={tab} setTab={setTab} />
   </>
 }
 
