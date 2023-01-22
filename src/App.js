@@ -30,8 +30,9 @@ function App() {
       }}>
         {isLoggedIn ? <>
           {(tab === 0) && <Home transactions={transactions} />}
-          {(tab === 1) && <Earnings transactions={transactions} setTransactions={setTransactions} />} </> : <>
+          {(tab === 1) && <Earnings transactions={transactions} setTransactions={setTransactions} />} 
           {(tab === 2) && <Settings />}
+          </> : <>
           {<SignIn handleLogin={handleLogin} setTab={setTab} />}
           {(tab === 3) && <SignUp setTab={setTab} />}
         </>}
