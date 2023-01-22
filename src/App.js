@@ -29,8 +29,7 @@ function App() {
     }}>
       {isLoggedIn ? <>
         {(tab == 0) && <Earnings />}
-        {(tab == 1) && <Home />}
-        {(tab == 2) && <Analytics />} </> : <>
+        {(tab == 1) && <Home />} </> : <>
         {(tab == 3) && <SignIn handleLogin={handleLogin} />}
         {(tab == 4) && <SignUp handleLogin={handleLogin} />}
       </>}
