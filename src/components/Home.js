@@ -17,7 +17,6 @@ export const Home = () => {
         }}>
             <p sx={{ display: 'inline-block', width: "100%" }}>Budget: $140.00</p>
             <p sx={{ display: 'inline-block', width: "100%" }}>Savings: $1739.25</p>
-
         </Box>
             <Line options={{
                 scales: { y: { min: 0 } },
