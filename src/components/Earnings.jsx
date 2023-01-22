@@ -15,7 +15,7 @@ import {
 import { Line } from "react-chartjs-2";
 import Box from '@mui/material/Box';
 import Card from '@mui/material/Card';
-import CardActions from '@mui/material/CardActions';
+import Stack from '@mui/material/Stack';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
@@ -89,8 +89,8 @@ export function Earnings() {
 
     return (
         <>
-            <Container sx={{ mt: 5 }}>
-                <Grid container spacing={2} justifyContent="center">
+            <Container sx={{ mt: 3 }}>
+                <Grid container spacing={2} sx={{ height: "90vh" }} justifyContent="center">
                     <Grid item xs={12} md={6}>
                         <Card sx={{ minWidth: 275, boxShadow: 4, borderRadius: 3 }}>
                             <CardContent>
@@ -103,8 +103,14 @@ export function Earnings() {
                             </CardContent>
                         </Card>
                     </Grid>
-                    <Grid item xs={10} md={8}>
+                    <Grid item xs={12} md={8}>
                         <Line options={options} data={data} />
+                    </Grid>
+                    <Grid item xs={12} md={8}>
+                        <Stack direction="row" justifyContent="center" spacing={5}>
+                            <Button variant="contained">Cash Out</Button>
+                            <Button variant="contained">Pay Balance</Button>
+                        </Stack>
                     </Grid>
                 </Grid>
 
