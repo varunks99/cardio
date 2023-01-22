@@ -29,6 +29,7 @@ function App() {
         {(tab == 3) && <SignIn handleLogin={handleLogin} />}
         {(tab == 4) && <SignUp handleLogin={handleLogin} />}
       </>}
+      <Box sx={{ height: 70 }}></Box>
     </Box>
     <Navigation isLoggedIn={isLoggedIn} tab={tab} setTab={setTab} />
   </>

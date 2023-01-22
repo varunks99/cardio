@@ -10,11 +10,11 @@ Chart.register(...registerables)
 
 export const Earnings = () => {
     const hardcodedCategories = {
-        "Food & Drink": 200,
-        "Entertainment": 300,
-        "Travel": 400,
-        "Personal Development": 1000,
-        "Miscellaneous": 350
+            "Food & Drink": 200,
+            "Entertainment": 300,
+            "Travel": 400,
+            "Personal Development": 1000,
+            "Miscellaneous": 350
     }
 
     const hardcodedMonths = {
@@ -32,7 +32,7 @@ export const Earnings = () => {
         }}>
             <Pie data={{
                 labels: Object.keys(hardcodedCategories),
-                datasets: [{
+                datasets: [ {
                     data: Object.values(hardcodedCategories),
                     backgroundColor: [
                         'red',
@@ -41,7 +41,7 @@ export const Earnings = () => {
                         'green',
                         'purple'
                     ],
-                }],
+                } ],
             }} />
             <Bar options={{
                 scales: {
@@ -53,7 +53,7 @@ export const Earnings = () => {
                 datasets: [
                     { data: Object.values(hardcodedMonths) }
                 ]
-            }} />
+            }}/>
 
         </Box>
     </>
