@@ -120,6 +120,13 @@ export function Earnings() {
                                 <Typography variant="h3" textAlign="center" fontWeight="bold" color="text.secondary" >
                                     $110.54
                                 </Typography>
+                                <br></br>
+                                <Typography variant="h5" textAlign="center" color="text.secondary" >
+                                    Your budget has 
+                                </Typography>
+                                <Typography variant="h3" textAlign="center" fontWeight="bold" color="text.secondary" >
+                                    $150.36
+                                </Typography>
                             </CardContent>
                         </Card>
                     </Grid>
