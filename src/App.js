@@ -17,16 +17,13 @@ function App() {
 
   return <>
     <Box sx={ {
-      height: "90vh",
-      overflowY: "scroll"
+      height: "auto",
     } }>
         { (tab == 0) && <Earnings /> }
         { (tab == 1) && <Home /> }
         { (tab == 2) && <Analytics /> }
     </Box>
-    <Navigation tab={tab} setTab={setTab} sx={{
-      height: "10vh"
-    }} />
+    <Navigation tab={tab} setTab={setTab} />
   </>
 }
 

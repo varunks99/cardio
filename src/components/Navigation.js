@@ -2,6 +2,11 @@ import { BottomNavigation, BottomNavigationAction, SpeedDialIcon } from "@mui/ma
 
 export const Navigation = ({ tab, setTab }) => {
     return <BottomNavigation
+        sx={{
+            position: "fixed",
+            width: "100%",
+            bottom: 0
+        }}
         showLabels
         value={tab}
         onChange={(event, newValue) => {
