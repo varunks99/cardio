@@ -43,15 +43,21 @@ export const Home = ({ transactions }) => {
                 <Card sx={{ borderRadius: 5 }}>
                     <CardContent sx={{ background: "rgb(148, 0, 212)", color: "#fff" }}>
                         <Typography textAlign="center"><SavingsIcon sx={{ fontSize: 40 }} /></Typography>
-                        <Typography textAlign="center" fontWeight="bold">Savings</Typography>
-                        <Typography textAlign="center" fontWeight="bold" variant="h5">$1739.25</Typography>
+                        <Typography textAlign="center" fontWeight="bold">Earnings</Typography>
+                        <Typography textAlign="center" fontWeight="bold" variant="h5">$739.25</Typography>
                     </CardContent>
                 </Card>
             </Grid>
             <Grid item xs={12} md={8} sx={{ height: 400 }}>
+                <Typography variant="h4" fontWeight="bold" sx={{ color: "rgb(148, 0, 212)" }} textAlign="center">Your earnings over time</Typography>
                 <Line
                     options={{
                         maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: false
+                            },
+                        },
                         scales: { y: { min: 0 } },
                         pointRadius: 0,
                         color: '#9747ff',

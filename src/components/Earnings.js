@@ -19,7 +19,7 @@ const Analytics = ({ transactions, setTransactions }) => {
         "Food & Drink": 200,
         "Entertainment": 150,
         "Travel": 80,
-        "Bills and utilities": 100,
+        "Groceries": 100,
         "Miscellaneous": 300
     }
 
@@ -27,7 +27,7 @@ const Analytics = ({ transactions, setTransactions }) => {
         "Food & Drink": "rgb(148, 0, 212)",
         "Entertainment": "rgba(148, 0, 212, 0.9)",
         "Travel": "rgba(148, 0, 212, 0.7)",
-        "Bills and utilities": "rgba(148, 0, 212, 0.5)",
+        "Groceries": "rgba(148, 0, 212, 0.5)",
         "Miscellaneous": "rgba(148, 0, 212, 0.3)"
     }
 
