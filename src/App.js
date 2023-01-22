@@ -1,30 +1,24 @@
 import logo from './logo.svg';
 import './App.css';
-import { Route, Routes, Navigate, Outlet, BrowserRouter } from 'react-router-dom';
 import SignUp from './components/SignUp/SignUp';
 import SignIn from './components/SignIn/Sign';
 
 
+import { Navigation } from './components/Navigation';
+import { Earnings } from './components/Earnings';
+import { Home } from './components/Home';
+import { Analytics } from './components/Analytics';
+import { useState } from 'react';
+
 function App() {
-  return (
-    <div className="App">
-      <BrowserRouter>
-        <Routes>
-          <Route path="/signup" element={<SignUp />} />
-          <Route path="/signin" element={<SignIn />} />
-          {/* <Route path="/" element={<PrivateOutlet />}>
-            <Route path="/" element={<Home user={userData || {}} />} />
-            <Route path="/statistics" element={<Statistics theme={theme} userRegion={userData.statsRegion} />} />
-            <Route path="/calculator" element={<Calculator user={userData || {}} />} />
-            <Route path="/news" element={<News theme={theme} />} />
-            <Route path="/account" element={<Account colorMode={colorMode} theme={theme} user={userData || {}} />} />
-            <Route path="/settings" element={<Settings />} />
-          </Route> 
-          <Route path="*" element={<PageNotFound />} />*/}
-        </Routes>
-      </BrowserRouter>
-    </div>
-  );
+  const [tab, setTab] = useState(1)
+
+  return <>
+      { (tab == 0) && <Earnings /> }
+      { (tab == 1) && <Home /> }
+      { (tab == 2) && <Analytics /> }
+      <Navigation tab={tab} setTab={setTab} />
+  </>
 }
 
 export default App;
