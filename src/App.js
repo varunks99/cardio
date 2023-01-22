@@ -7,6 +7,7 @@ import { Home } from './components/Home';
 import { useEffect, useState, createContext, useContext } from 'react';
 import { Box } from '@mui/material';
 import apiClient from './clients/api-client';
+import { Settings } from './components/Settings';
 
 export const TokenContext = createContext(localStorage.getItem('cardio-auth'));
 function App() {
@@ -25,11 +26,12 @@ function App() {
 
       <Box sx={{
         margin: "auto",
-        marginTop: 2
+        marginTop: 0
       }}>
         {isLoggedIn ? <>
           {(tab === 0) && <Home transactions={transactions} />}
           {(tab === 1) && <Earnings transactions={transactions} setTransactions={setTransactions} />} </> : <>
+          {(tab === 2) && <Settings />}
           {<SignIn handleLogin={handleLogin} setTab={setTab} />}
           {(tab === 3) && <SignUp setTab={setTab} />}
         </>}
