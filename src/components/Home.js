@@ -11,7 +11,7 @@ import PriceCheckIcon from '@mui/icons-material/PriceCheck';
 
 export const Home = () => {
     return <Container>
-        <Grid container justifyContent="center" spacing={2}>
+        <Grid container justifyContent="center" spacing={2} sx={{ p: 4 }}>
             <Grid item xs={6} md={3}>
                 <Card sx={{ borderRadius: 5 }}>
                     <CardContent sx={{ background: "rgb(148, 0, 212)", color: "#fff" }}>

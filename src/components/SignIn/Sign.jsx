@@ -38,7 +38,7 @@ export default function SignIn({ handleLogin, setTab }) {
 
     return (
         <ThemeProvider theme={theme}>
-            <Container maxWidth="100%" sx={{ height: "100vh", p: 5, background: 'rgb(148, 0, 212)', mt: 0 }}>
+            <Container maxWidth="100%" sx={{ height: "100vh", p: 2, background: 'rgb(148, 0, 212)', mt: 0 }}>
                 <Container component="main" maxWidth="xs">
                     <CssBaseline />
                     <Paper elevation={5} sx={{ borderRadius: 6 }}>
