@@ -8,7 +8,7 @@ import LogoutIcon from '@mui/icons-material/Logout';
 
 export const Navigation = ({ tab, setTab }) => {
     return (
-        <Paper sx={{ 
+        <Paper sx={{
             position: 'fixed',
             bottom: 0,
             left: 0,
@@ -25,7 +25,7 @@ export const Navigation = ({ tab, setTab }) => {
                     setTab(newValue);
                 }} >
                 <BottomNavigationAction label="Home" icon={<HomeIcon />} />
-                <BottomNavigationAction label="Earnings" icon={<AttachMoneyIcon />} />
+                <BottomNavigationAction label="Spending" icon={<AttachMoneyIcon />} />
                 <BottomNavigationAction label="Settings" icon={<SettingsIcon />} />
                 <BottomNavigationAction label="Sign In" icon={<LoginIcon />} sx={{ display: "none" }} />
                 <BottomNavigationAction label="Sign Up" icon={<LogoutIcon />} sx={{ display: "none" }} />
