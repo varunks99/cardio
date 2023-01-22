@@ -1,29 +1,37 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import React from 'react';
+
+import {
+  Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+import apiClient from '../../clients/api-client';
 
 const theme = createTheme();
 
-export default function SignIn({ handleLogin }) {
-    const handleSubmit = (event) => {
+export default function SignIn() {
+    const loginUser = async (user) => {
+        try {
+            console.log(user)
+            const { data } = await apiClient.post('/auth/login', user);
+            console.log(data)
+            localStorage.setItem('cardio-auth', data.access_token);
+        } catch (error) {
+            console.log(error)
+        }
+    };
+
+    const handleSubmit = async (event) => {
         event.preventDefault();
+
         const data = new FormData(event.currentTarget);
-        console.log({
+        const user = {
             email: data.get('email'),
             password: data.get('password'),
-        });
-        handleLogin();
+        };
+
+        await loginUser(user);
     };
 
     return (
@@ -44,30 +52,25 @@ export default function SignIn({ handleLogin }) {
                     <Typography component="h1" variant="h5">
                         Sign in
                     </Typography>
-                    <Box component="form" onSubmit={handleSubmit} noValidate sx={{ mt: 1 }}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 1 }}>
                         <TextField
-                            margin="normal"
-                            required
-                            fullWidth
-                            id="email"
-                            label="Email Address"
                             name="email"
+                            type="email"
+                            label="Email Address"
                             autoComplete="email"
+                            required
                             autoFocus
+                            fullWidth
+                            margin="normal"
                         />
                         <TextField
-                            margin="normal"
+                            name="password"
+                            type="password"
+                            label="Password"
+                            autoComplete="current-password"
                             required
                             fullWidth
-                            name="password"
-                            label="Password"
-                            type="password"
-                            id="password"
-                            autoComplete="current-password"
-                        />
-                        <FormControlLabel
-                            control={<Checkbox value="remember" color="primary" />}
-                            label="Remember me"
+                            margin="normal"
                         />
                         <Button
                             type="submit"

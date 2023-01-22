@@ -1,37 +1,38 @@
-import * as React from 'react';
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Grid from '@mui/material/Grid';
-import Box from '@mui/material/Box';
+import React from 'react';
+
+import {
+  Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography,
+} from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
-import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import axios from 'axios';
+
+import apiClient from '../../clients/api-client';
 
 const theme = createTheme();
 
-export default function SignUp({ handleLogin }) {
-    const handleSubmit = async (event) => {
-        event.preventDefault();
-        try {
-            const data = new FormData(event.currentTarget);
-            const response = await axios.post('https://bcd6-132-205-229-213.ngrok.io/auth/register', {
-                firstName: data.get('firstName'),
-                lastName: data.get('lastName'),
-                email: data.get('email'),
-                password: data.get('password'),
-            });
-            console.log(response);
-        } catch (e) {
-            console.log(e)
-        }
+export default function SignUp() {
+  const signUpUser = async (user) => {
+    try {
+      const { data } = await apiClient.post('/auth/register', user);
+      localStorage.setItem('cardio-auth', data.access_token);
+    } catch (error) {
+        console.log(error);
+    }
+  };
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+
+    const data = new FormData(event.currentTarget);
+    const user = {
+      firstName: data.get('firstName'),
+      lastName: data.get('lastName'),
+      email: data.get('email'),
+      password: data.get('password'),
     };
+
+    await signUpUser(user);
+  };
 
     return (
         <ThemeProvider theme={theme}>
@@ -51,27 +52,27 @@ export default function SignUp({ handleLogin }) {
                     <Typography component="h1" variant="h5">
                         Sign up
                     </Typography>
-                    <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 3 }}>
+                    <Box component="form" onSubmit={handleSubmit} sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
                             <Grid item xs={12} sm={6}>
                                 <TextField
-                                    autoComplete="given-name"
                                     name="firstName"
-                                    required
-                                    fullWidth
-                                    id="firstName"
+                                    type="text"
                                     label="First Name"
+                                    autoComplete="given-name"
+                                    required
                                     autoFocus
+                                    fullWidth
                                 />
                             </Grid>
                             <Grid item xs={12} sm={6}>
                                 <TextField
+                                    name="lastName"
+                                    type="text"
+                                    label="Last Name"
+                                    autoComplete="family-name"
                                     required
                                     fullWidth
-                                    id="lastName"
-                                    label="Last Name"
-                                    name="lastName"
-                                    autoComplete="family-name"
                                 />
                             </Grid>
                             <Grid item xs={12}>
@@ -86,13 +87,12 @@ export default function SignUp({ handleLogin }) {
                             </Grid>
                             <Grid item xs={12}>
                                 <TextField
+                                    name="password"
+                                    type="password"
+                                    label="Password"
+                                    autoComplete="new-password"
                                     required
                                     fullWidth
-                                    name="password"
-                                    label="Password"
-                                    type="password"
-                                    id="password"
-                                    autoComplete="new-password"
                                 />
                             </Grid>
 
@@ -102,7 +102,6 @@ export default function SignUp({ handleLogin }) {
                             fullWidth
                             variant="contained"
                             sx={{ mt: 3, mb: 2 }}
-                            onClick={handleLogin}
                         >
                             Sign Up
                         </Button>
