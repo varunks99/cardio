@@ -10,7 +10,7 @@ import apiClient from '../../clients/api-client';
 
 const theme = createTheme();
 
-export default function SignUp(props) {
+export default function SignUp({ setTab }) {
     const signUpUser = async (user) => {
         try {
             const { data } = await apiClient.post('/auth/register', user);
@@ -107,7 +107,7 @@ export default function SignUp(props) {
                         </Button>
                         <Grid container justifyContent="center">
                             <Grid item>
-                                <Link href="#" variant="body2">
+                                <Link onClick={() => setTab(2)} variant="body2">
                                     Already have an account? Sign in
                                 </Link>
                             </Grid>

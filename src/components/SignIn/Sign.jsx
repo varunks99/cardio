@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useContext } from 'react';
 
 import {
     Avatar, Box, Button, Container, CssBaseline, Grid, Link, TextField, Typography, Paper
@@ -11,8 +11,8 @@ import apiClient from '../../clients/api-client';
 import Logo from './C.png';
 
 const theme = createTheme();
-
 export default function SignIn({ handleLogin, setTab }) {
+
     const loginUser = async (user) => {
         try {
             console.log(user)
@@ -20,9 +20,10 @@ export default function SignIn({ handleLogin, setTab }) {
             localStorage.setItem('cardio-auth', data.access_token);
             handleLogin();
         } catch (error) {
-            console.log(error)
+            console.error(error)
         }
     };
+
 
     const handleSubmit = async (event) => {
         event.preventDefault();
@@ -90,7 +91,7 @@ export default function SignIn({ handleLogin, setTab }) {
                                 </Button>
                                 <Grid container>
                                     <Grid item>
-                                        <Typography>Don't have an account? <Link onClick={() => setTab(3)} variant="body2" style={{ color: "black", fontWeight: "900" }}>Sign Up</Link></Typography>
+                                        <Typography onClick={() => setTab(3)} >Don't have an account? <Link variant="body2" style={{ color: "black", fontWeight: "900" }}>Sign Up</Link></Typography>
                                     </Grid>
                                 </Grid>
                             </Box>

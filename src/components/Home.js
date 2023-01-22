@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Line } from "react-chartjs-2";
 import Box from "@mui/material/Box"
 import Container from "@mui/material/Container"
@@ -8,16 +8,34 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import SavingsIcon from '@mui/icons-material/Savings';
 import PriceCheckIcon from '@mui/icons-material/PriceCheck';
+import { TokenContext } from "../App";
+import apiClient from "../clients/api-client";
 
-export const Home = () => {
+export const Home = ({ transactions }) => {
+    const token = useContext(TokenContext);
+    const [user, setUser] = useState({});
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const user = await apiClient.get('/account', { headers: { authorization: `Bearer ${token}` } });
+                if (!user.data) {
+                    await apiClient.post('/account', { "creditLimit": 1000 }, { headers: { authorization: `Bearer ${token}` } });
+                } else setUser(user.data);
+            } catch (e) {
+                console.error(e)
+            }
+        })()
+
+    }, [transactions])
     return <Container>
         <Grid container justifyContent="center" spacing={2}>
             <Grid item xs={6} md={3}>
                 <Card sx={{ borderRadius: 5 }}>
                     <CardContent sx={{ background: "rgb(148, 0, 212)", color: "#fff" }}>
                         <Typography textAlign="center"><PriceCheckIcon sx={{ fontSize: 40 }} /></Typography>
-                        <Typography textAlign="center" fontWeight="bold">Budget</Typography>
-                        <Typography textAlign="center" fontWeight="bold" variant="h5">$140.00</Typography>
+                        <Typography textAlign="center" fontWeight="bold">Balance</Typography>
+                        <Typography textAlign="center" fontWeight="bold" variant="h5">${user.balance}</Typography>
                     </CardContent>
                 </Card>
             </Grid>

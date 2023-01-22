@@ -13,9 +13,8 @@ import { TokenContext } from "../App";
 
 Chart.register(...registerables)
 
-const Analytics = () => {
+const Analytics = ({ transactions, setTransactions }) => {
     const token = useContext(TokenContext)
-    const [rows, setRows] = useState([])
     const categories = {
         "Food & Drink": 200,
         "Entertainment": 150,
@@ -37,13 +36,23 @@ const Analytics = () => {
         (async () => {
             try {
                 const { data } = await apiClient.get("/transactions", { headers: { authorization: `Bearer ${token}` } });
-                setRows(data)
+                setTransactions(data)
             } catch (e) {
                 console.log(e)
             }
         })()
     }, [])
 
+    const addTransaction = async () => {
+        const transaction = {
+            "date": "2023-01-21",
+            "amount": 17.86,
+            "merchant": "Tim Hortons",
+            "category": "Food & Drink"
+        }
+        setTransactions([...transactions, transaction]);
+        await apiClient.post('/transactions', transaction, { headers: { authorization: `Bearer ${token}` } });
+    }
 
 
     return <Container>
@@ -61,11 +70,11 @@ const Analytics = () => {
                     }} />
             </Grid>
             <Grid item justifyContent="center" xs={12} md={8} mt={5} mb={8}>
-                <Typography variant="h5" textAlign="center" fontWeight="bold" sx={{ color: "#9400d4", my: 2 }}>Transactions</Typography>
+                <Typography variant="h5" textAlign="center" fontWeight="bold" sx={{ color: "#9400d4", my: 2 }}>Transactions  <Chip label="Add" onClick={addTransaction} /></Typography>
                 <Stack width="100%" justifyContent="space-around">
-                    {rows.map((row, i) => (
+                    {transactions.map((row, i) => (
                         <>
-                            <Grid container justifyContent="center" alignItems="center" sx={{ background: colors[row.category] || "#9400d4", color: "#fff", p: 2, borderRadius: i === 0 ? "20px 20px 0 0" : i === rows.length - 1 ? "0 0 20px 20px" : 0 }}>
+                            <Grid container justifyContent="center" alignItems="center" sx={{ background: colors[row.category] || "#9400d4", color: "#fff", p: 2, borderRadius: i === 0 ? "20px 20px 0 0" : i === transactions.length - 1 ? "0 0 20px 20px" : 0 }}>
                                 <Grid item xs={4} md={3}><Typography fontWeight="bold">{row.merchant}</Typography></Grid>
                                 <Grid item md={3} sx={{ display: { xs: "none", md: "block" } }}><Chip sx={{ color: "#fff", background: "rgba(255, 255, 2555, 0.3)" }} label={row.category} /></Grid>
                                 <Grid item xs={4} md={3}><Typography>{new Date(row.date).toLocaleDateString()}</Typography></Grid>
