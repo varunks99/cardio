@@ -7,6 +7,7 @@ import { Earnings } from './components/Earnings';
 import { Home } from './components/Home';
 import { Analytics } from './components/Analytics';
 import { useState } from 'react';
+import { Box } from '@mui/material';
 
 function App() {
   const [tab, setTab] = useState(3);
@@ -18,13 +19,17 @@ function App() {
   }
 
   return <>
-    {isLoggedIn ? <>
-      {(tab == 0) && <Earnings />}
-      {(tab == 1) && <Home />}
-      {(tab == 2) && <Analytics />} </> : <>
-      {(tab == 3) && <SignIn handleLogin={handleLogin} />}
-      {(tab == 4) && <SignUp handleLogin={handleLogin} />}
-    </>}
+    <Box sx={{
+      height: "auto",
+    }}>
+      {isLoggedIn ? <>
+        {(tab == 0) && <Earnings />}
+        {(tab == 1) && <Home />}
+        {(tab == 2) && <Analytics />} </> : <>
+        {(tab == 3) && <SignIn handleLogin={handleLogin} />}
+        {(tab == 4) && <SignUp handleLogin={handleLogin} />}
+      </>}
+    </Box>
     <Navigation isLoggedIn={isLoggedIn} tab={tab} setTab={setTab} />
   </>
 }
