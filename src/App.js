@@ -9,13 +9,23 @@ import { Analytics } from './components/Analytics';
 import { useState } from 'react';
 
 function App() {
-  const [tab, setTab] = useState(1)
+  const [tab, setTab] = useState(3);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+    setTab(1)
+  }
 
   return <>
-    {(tab == 0) && <Earnings />}
-    {(tab == 1) && <Home />}
-    {(tab == 2) && <Analytics />}
-    <Navigation tab={tab} setTab={setTab} />
+    {isLoggedIn ? <>
+      {(tab == 0) && <Earnings />}
+      {(tab == 1) && <Home />}
+      {(tab == 2) && <Analytics />} </> : <>
+      {(tab == 3) && <SignIn handleLogin={handleLogin} />}
+      {(tab == 4) && <SignUp handleLogin={handleLogin} />}
+    </>}
+    <Navigation isLoggedIn={isLoggedIn} tab={tab} setTab={setTab} />
   </>
 }
 
